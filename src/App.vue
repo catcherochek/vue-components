@@ -1,17 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <TableView />
+    <TableView :msgg = "myval" />
   </div>
 </template>
 
 <script>
+
 import HelloWorld from './components/HelloWorld.vue'
 import TableView from './components/TableView'
 
+
 export default {
   name: 'app',
+  data:function(){
+    return{
+      myval:[{"day":"Sat280412","team1":"WiganAthletic","count":"4-0","team2":"NewcastleUnited"},
+        {"day":"Sat280412","team1":"Sunderland","count":"2-2","team2":"BoltonWanderers"}],
+    }
+  },
+
+  methods: {
+    sayhi:function (event) {
+
+    },
+    binderr:function (res) {
+      //console.log(res);
+      res.forEach(element => {
+        console.log(element);
+        this.myval.push(element);
+      });
+
+     // console.log(this.myval);
+    }
+  },
+  mounted: function () {
+
+      this.$jsoner.execute("login24",{},this.binderr,()=>console.log("error"));
+    //this.$jsoner.test();
+    },
+
   components: {
     TableView,
     HelloWorld
